@@ -28,7 +28,21 @@
 | 背景/scrim | `#3E2723` | 深棕 |
 | 主体细描边 | `#FFFFFF` | 细白，不抢字 |
 
-**字体：** 仅 `typography-outline.jpg` — ultra-bold dry brush marker, porous jagged edges, massive stacked headline。**不要** vertical/marker/scattered。
+**字体（必须极度贴近 typography-outline.jpg，占 prompt 50% 篇幅）：**
+
+克隆「忙一忙 / 創作 / 是大事情」那种笔刷，**不是**普通粗黑体、不是 smooth 马克笔、不是印刷体。
+
+| 特征 | 必须做到 |
+|------|----------|
+| 边缘 | **porous 多孔、grainy 颗粒、jagged 毛糙**，像干刷/没墨的 felt marker，绝不光滑 |
+| 笔画 | **超粗实心**，圆角接头；点画是**圆角块/小矩形**，不是细点 |
+| 字重层次 | 主词（如「几点开饭」）**明显更大**于副词（如「不好意思」），大小参差、略倾斜 |
+| 堆叠 | 多行**密集堆叠**，行距紧，有 DIY 海报感 |
+| 气质 | 原始、高能量、儿童手写但更「野」，参考图里「創作」「大事情」的冲击力 |
+
+prompt 必写：`Clone typography-outline.jpg exactly: ultra-bold dry brush marker, porous grainy jagged edges, blob-like dots, dense stacked lines, main keywords significantly larger, raw hand-drawn NOT vector smooth.`
+
+**不要** vertical / marker / scattered 任何其他笔刷。
 
 ### doodle_fresh ← ref-wonder-night
 
@@ -39,7 +53,22 @@
 | 小英文/quote | `#FFFFFF` | 可选 |
 | 背景 | 原图虚化偏暗 | 保白字 AA |
 
-**字体：** 仅 `typography-scattered.jpg` — playful brush pen, rounded tips, scattered staircase lines。**不要** outline/marker。
+**字体（必须极度贴近 typography-scattered.jpg，占 prompt 50% 篇幅）：**
+
+克隆「花样人生 / 的100种活法」那种笔刷，**不是** style1 的干刷毛边、**不是** fat marker、**不是** straight grid。
+
+| 特征 | 必须做到 |
+|------|----------|
+| 笔形 | **软头 brush pen / 粗马克笔**，圆头收笔，笔触起笔重、收笔自然变细 |
+| 边缘 | 略带 ink bleed，**圆润有机**，不要 jagged 毛糙（这是 scattered 与 outline 的核心区别） |
+| 排版 | **阶梯式/波浪式错落**（staggered staircase），绝不在一条直线上 |
+| 字大小 | 每字略不同，有节奏；可有**超长竖划**贯穿（如「样」「法」那种） |
+| 点缀 | 可选小字 **pinyin/英文** 填负空间（HUA YANG 风格），clean sans 与主字对比 |
+| 气质 | 俏皮、艺术、小红书 trendy，温暖流动 |
+
+prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded tips, organic taper strokes, staggered wave staircase layout, varied character sizes, optional small pinyin accents, smooth-rounded NOT jagged dry brush.`
+
+**不要** outline / marker 笔刷。
 
 ### color_block ← ref-specialty-dish
 
@@ -68,8 +97,10 @@ Xiaohongshu cover 3:4. Subject from user photo — isolated, unchanged.
 
 PRESET: {preset}
 COMPOSITION — copy exactly from: references/covers/.../{cover_ref}
-TYPOGRAPHY — copy brush style ONLY from: references/{typography_ref}
-  Do NOT mix other typography files. Clone stroke weight, texture, layout feel.
+TYPOGRAPHY — 最高优先级，ONLY from references/{typography_ref}:
+{paste full typography prompt block from sections above — outline or scattered spec}
+Typography must be visually indistinguishable in brush texture from the typography reference image.
+Do NOT use generic bold font, smooth vector text, or system typeface.
 
 COLORS — use preset palette hex above ONLY. Do NOT sample colors from user photo.
 
@@ -85,8 +116,7 @@ WCAG AA. Never system fonts.
 ## 中文补充
 
 ```
-构图严格参考 {cover_ref}，字体只参考 {typography_ref} 这一种笔刷。
-颜色用参考图色板：{hex list}，不要从用户照片取色。
+构图严格参考 {cover_ref}，字体必须像素级贴近 typography 参考图笔刷（outline=毛糙干刷；scattered=圆润阶梯笔）。颜色用 reference 色板。
 标题逐字正确：{title_full}。
 ```
 
