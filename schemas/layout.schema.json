@@ -2,35 +2,74 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "HandwrittenXHSCoverLayout",
   "type": "object",
-  "required": ["preset", "title_full", "text_blocks", "constraints", "variants"],
+  "required": ["preset", "title_full", "text_blocks", "constraints"],
   "properties": {
     "preset": {
-      "enum": [
-        "vertical_emotion",
-        "stamp_travel",
-        "subject_outline",
-        "scattered_keywords"
-      ]
-    },
-    "image_treatment": {
-      "enum": ["none", "desaturate", "film_grain"]
+      "enum": ["exaggerated_headline", "doodle_fresh", "color_block"]
     },
     "title_full": { "type": "string", "maxLength": 30 },
+    "colors_from_extraction": { "type": "boolean", "const": true },
+    "color_roles_used": {
+      "type": "object",
+      "properties": {
+        "title_fill": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "title_outline": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "doodle_stroke": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "subject_outline": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "source": { "type": "string" }
+      }
+    },
+    "cover_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "typography_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "subject_placement": { "type": "string" },
+    "subject_scale": { "type": "number", "minimum": 0.25, "maximum": 0.6 },
+    "background": {
+      "enum": [
+        "keep_dark",
+        "keep_soft",
+        "color_blocks",
+        "photo_with_blocks",
+        "desaturated"
+      ]
+    },
+    "block_colors": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+      "maxItems": 3
+    },
+    "block_layout": {
+      "enum": [
+        "top_white_bar",
+        "diagonal_cut",
+        "torn_paper",
+        "side_polygon",
+        "full_collage"
+      ]
+    },
     "text_blocks": {
       "type": "array",
       "minItems": 1,
       "maxItems": 6,
       "items": {
         "type": "object",
-        "required": ["content", "style", "color", "layout", "position", "size"],
+        "required": ["content", "color", "layout", "position", "size"],
         "properties": {
           "content": { "type": "string" },
-          "style": { "const": "bold_childlike_handwriting" },
           "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+          "color_source": { "type": "string" },
+          "outline_color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
           "layout": { "enum": ["vertical", "horizontal", "scattered"] },
           "position": { "type": "string" },
-          "size": { "enum": ["medium", "large", "xlarge"] },
-          "outline": { "enum": [null, "white_thick", "white_thin"] }
+          "size": { "enum": ["large", "xlarge"] },
+          "outline": {
+            "enum": [null, "white_thick", "white_thin", "yellow_thick", "black_thick"]
+          }
         }
       }
     },
@@ -41,11 +80,31 @@
         "required": ["type"],
         "properties": {
           "type": {
-            "enum": ["arrow", "subject_outline", "stamp", "scribble"]
-          },
-          "text": { "type": "string" },
-          "color": { "type": "string" }
+            "enum": [
+              "arrow",
+              "subject_outline",
+              "scribble",
+              "star",
+              "line_icon",
+              "speech_bubble",
+              "motion_lines"
+            ]
+          }
         }
+      }
+    },
+    "illustrations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "text_scale": { "type": "number", "minimum": 1.0, "maximum": 1.3 },
+    "text_scrim": { "enum": ["none", "dark", "light"] },
+    "contrast": {
+      "type": "object",
+      "properties": {
+        "target": { "const": "WCAG_AA" },
+        "min_ratio": { "type": "number", "minimum": 3.0, "maximum": 7.0 },
+        "verified": { "type": "boolean" }
       }
     },
     "constraints": {
@@ -53,29 +112,10 @@
       "items": {
         "enum": [
           "do_not_cover_face",
-          "keep_original_person_unchanged",
-          "text_only_in_negative_space"
+          "subject_already_extracted",
+          "text_only_in_negative_space",
+          "wcag_aa_contrast"
         ]
-      }
-    },
-    "variants": {
-      "type": "object",
-      "required": ["A_conservative", "B_emotional"],
-      "properties": {
-        "A_conservative": {
-          "type": "object",
-          "properties": {
-            "decoration_level": { "enum": ["low", "medium"] },
-            "text_scale": { "type": "number", "minimum": 0.7, "maximum": 1.0 }
-          }
-        },
-        "B_emotional": {
-          "type": "object",
-          "properties": {
-            "decoration_level": { "enum": ["medium", "high"] },
-            "text_scale": { "type": "number", "minimum": 1.0, "maximum": 1.3 }
-          }
-        }
       }
     }
   }

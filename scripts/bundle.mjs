@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Bundle handwritten-xhs-cover skill into one markdown for paste/import.
- * Usage: node .cursor/skills/handwritten-xhs-cover/scripts/bundle.mjs
+ * Usage: node scripts/bundle.mjs
  */
 
 import { readFileSync, writeFileSync } from "fs";
@@ -13,16 +13,15 @@ const skillDir = join(root, "..");
 
 const files = [
   "SKILL.md",
-  "style-guide.md",
   "prompts/analyze-image.md",
   "prompts/layout-plan.md",
   "prompts/generate-poster.md",
   "examples/good-bad.md",
-  "references/README.md",
 ];
 
 let out = `# handwritten-xhs-cover · bundled skill\n\n`;
-out += `> Generated ${new Date().toISOString().slice(0, 10)}. Source: copy-swipe/.cursor/skills/handwritten-xhs-cover/\n\n`;
+out += `> Generated ${new Date().toISOString().slice(0, 10)}. Source: evesuen/handwritten-xhs-cover\n\n`;
+out += `> Reference images: references/covers/ + references/typography-*.jpg (not inlined)\n\n`;
 
 for (const rel of files) {
   const path = join(skillDir, rel);

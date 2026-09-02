@@ -1,81 +1,69 @@
-# Prompt · 生图模板
+# 生图 · 3 张并行（Step 4 只读本文件）
 
-将 `layout.json` 填进下列模板，调用图像生成/编辑工具。**每张图单独一条 prompt。**
+**打开封面参考图 + 字体参考图各至少 1 张**（以图为准，禁止系统字体）。
 
-## 通用模板（英文主体，模型兼容性更好）
+## 参考文件
 
-```
-Edit this photo into a Xiaohongshu (Little Red Book) viral cover. CRITICAL RULES:
-- Keep the original person/product EXACTLY unchanged — same face, pose, clothing, background.
-- ONLY add handwritten text and decorations in the empty/negative space.
-- Do NOT use printed fonts, center-aligned PowerPoint style, or neat typography.
+| preset | 封面目录（任开 1～2 张） | 字体 |
+|--------|--------------------------|------|
+| exaggerated_headline | `covers/exaggerated-headline/`：ref-desert-2026, ref-high-energy, ref-ai-benefactor, ref-marriage-choice | typography-outline.jpg + typography-vertical.jpg |
+| doodle_fresh | `covers/doodle-fresh/`：ref-wonder-night, ref-treasure-shop, ref-desert-2026, ref-hiking-steps | typography-scattered.jpg + typography-marker.jpg |
+| color_block | `covers/color-block/`：ref-travel-guide, ref-specialty-dish, ref-hiking-scenery, ref-urban-news | typography-marker.jpg + typography-outline.jpg |
 
-STYLE:
-- Hand-drawn, wobbly, childlike marker handwriting
-- Bold strokes, uneven thickness, slightly crooked
-- Short emotional title, NOT a paragraph
+路径前缀：`references/`
 
-LAYOUT (from plan):
-- Preset: {preset}
-- Text blocks: {text_blocks_description}
-- Text colors: {colors}
-- Layout direction: {vertical | scattered | multi-line}
-- Image treatment: {none | desaturate to B&W | subtle film grain}
+## 字体笔刷关键词
 
-DECORATIONS (only if specified):
-{decorations_description}
+**exaggerated_headline** — outline: ultra-bold dry brush, porous jagged edges, massive headline; vertical: expressive brush, dry brush texture, elongated strokes
 
-EXACT CHINESE CHARACTERS (must be 100% correct, no wrong characters):
-「{title_full}」
+**doodle_fresh** — playful brush pen, scattered lines, rounded stroke tips, casual vlog diary; marker 为 ins casual 底线
 
-Variant: {A_conservative | B_emotional}
-- A: smaller text, fewer decorations, more whitespace
-- B: larger text, more hand-drawn scribbles/outlines/arrows
+**color_block** — bold casual marker on solid color block, high contrast vs block; outline 用于色块上超粗标题
 
-Aspect ratio: keep original or 3:4 vertical social cover.
-```
+**通用：** organic hand-drawn；字色/描边/色块 hex **从原图提取**，WCAG AA
 
-## 中文补充句（豆包等中文模型可加在末尾）
+## 构图要点
+
+**exaggerated_headline** — 标题 50–65% 视觉；主体 40–55% 放大；**细描边**不抢标题；装饰极少
+
+**doodle_fresh** — 标题中等偏大散落；主体 30–45%；**必配 2～4 doodle**（星/箭头/线稿 icon/bubble）；sketchy 描边
+
+**color_block** — 大色块 30–50%（从提取色衍生）；撕纸/斜切；主体 sticker 描边；标题在纯色块上
+
+## 通用模板
 
 ```
-在画面留白处添加手写风标题，不遮挡人物面部。字体为粗黑歪扭儿童手写体。
-标题必须逐字正确：{title_full}。保持原图人物和场景不变，只叠加文字和手绘装饰。
+Xiaohongshu cover. Subject extracted/isolated — keep face, pose, clothing.
+
+STYLE PRESET: {preset}
+Match COMPOSITION from: references/covers/{dir}/{cover_ref_file}
+Match TYPOGRAPHY from: references/{typography_ref_file} — {keywords above}
+
+SUBJECT: scale {subject_scale}, placement {subject_placement}, outline {outline_spec}
+
+COLORS — from analysis.extracted_palette / color_roles:
+title_fill {hex} ({source}), outline {hex}, doodle/block {hex list}
+WCAG AA ≥4.5:1 text vs bg; adjust lightness within same hue family only
+
+TEXT — EXACT Chinese: 「{title_full}」
+{text_blocks_description}
+
+DECORATIONS: {per preset}
+
+Never system fonts. 3:4 vertical.
 ```
 
-## text_blocks 转描述示例
+## 中文补充
 
-**竖排：**
 ```
-On the LEFT empty wall area, add vertical handwritten text in yellow (#E8C547):
-「做视频」 above 「记住这个词」, stacked vertically, large, wobbly strokes.
-Add one hand-drawn arrow pointing from the text toward the small object in the air.
+构图参考 {cover_ref}，字体参考 {typography_ref}。
+颜色从原图提取：{color_roles}，WCAG AA。标题逐字正确：{title_full}。
 ```
 
-**散落：**
-```
-Desaturate background to black and white. Scatter four text blocks in teal (#5EB3B8) with thick white outlines:
-「要疯」 top-left, 「要野」 top-right, 「要自由」 mid-left, 「要浪漫」 bottom spanning width.
-Add small white scribble marks around letters. Person in center unchanged.
-```
+## 参数
 
-**描边人物：**
-```
-Add rough white outline stroke around the person's silhouette. Below, white handwritten text in 3 lines:
-「我眼里的世界，」 「也想」 「分享给你」. Subtle motion scribble lines near the coat. Film grain mood.
-```
+strength 0.3～0.5 · 并行 3 条 · 错字重试 1 次
 
-## img2img 参数建议
+## 降级
 
-| 参数 | 建议 |
-|------|------|
-| strength / denoise | 0.25～0.45（越低越保真） |
-| 并行 | 同时跑 A、B 两条 prompt |
-| 失败重试 | 强调 EXACT CHINESE CHARACTERS |
-
-## 无图生图工具时的降级
-
-输出：
-
-1. 填好的完整英文 + 中文 prompt 各一条（A / B）
-2. `layout.json`
-3. 说明：「请将原图与此 prompt 一并送入支持 img2img 的生图产品」
+输出 3 条填好的 prompt + 3 份 layout + 参考图路径
