@@ -1,69 +1,95 @@
 # 生图 · 3 张并行（Step 4 只读本文件）
 
-**打开封面参考图 + 字体参考图各至少 1 张**（以图为准，禁止系统字体）。
+## 铁律
 
-## 参考文件
+1. **每种 preset 只开 1 张封面参考 + 1 张字体参考**，严格 1:1 绑定，禁止混 typography、禁止同时参考多种笔刷。
+2. **颜色只用下方色板**（摘自封面 reference 图），**禁止从用户原图提取配色**。
+3. 构图学 cover_ref；**字体笔刷完全克隆 typography_ref**；WCAG AA。
 
-| preset | 封面目录（任开 1～2 张） | 字体 |
-|--------|--------------------------|------|
-| exaggerated_headline | `covers/exaggerated-headline/`：ref-desert-2026, ref-high-energy, ref-ai-benefactor, ref-marriage-choice | typography-outline.jpg + typography-vertical.jpg |
-| doodle_fresh | `covers/doodle-fresh/`：ref-wonder-night, ref-treasure-shop, ref-desert-2026, ref-hiking-steps | typography-scattered.jpg + typography-marker.jpg |
-| color_block | `covers/color-block/`：ref-travel-guide, ref-specialty-dish, ref-hiking-scenery, ref-urban-news | typography-marker.jpg + typography-outline.jpg |
+## 固定绑定（不可换）
+
+| preset | cover_ref | typography_ref |
+|--------|-----------|----------------|
+| exaggerated_headline | `covers/exaggerated-headline/ref-high-energy.png` | `typography-outline.jpg` |
+| doodle_fresh | `covers/doodle-fresh/ref-wonder-night.png` | `typography-scattered.jpg` |
+| color_block | `covers/color-block/ref-specialty-dish.png` | `typography-marker.jpg` |
 
 路径前缀：`references/`
 
-## 字体笔刷关键词
+## 参考色板（来自封面 reference，勿改 hex）
 
-**exaggerated_headline** — outline: ultra-bold dry brush, porous jagged edges, massive headline; vertical: expressive brush, dry brush texture, elongated strokes
+### exaggerated_headline ← ref-high-energy
 
-**doodle_fresh** — playful brush pen, scattered lines, rounded stroke tips, casual vlog diary; marker 为 ins casual 底线
+| 用途 | hex | 说明 |
+|------|-----|------|
+| 上行字 | `#FFFFFF` | 白手写 |
+| 主标题 fill | `#E53935` | 红 |
+| 主标题 outline | `#FFEB3B` | 黄描边 |
+| 背景/scrim | `#3E2723` | 深棕 |
+| 主体细描边 | `#FFFFFF` | 细白，不抢字 |
 
-**color_block** — bold casual marker on solid color block, high contrast vs block; outline 用于色块上超粗标题
+**字体：** 仅 `typography-outline.jpg` — ultra-bold dry brush marker, porous jagged edges, massive stacked headline。**不要** vertical/marker/scattered。
 
-**通用：** organic hand-drawn；字色/描边/色块 hex **从原图提取**，WCAG AA
+### doodle_fresh ← ref-wonder-night
+
+| 用途 | hex | 说明 |
+|------|-----|------|
+| 散落字 | `#FFFFFF` | 白手写 |
+| doodle/描边 | `#FACC15` | 黄线稿 |
+| 小英文/quote | `#FFFFFF` | 可选 |
+| 背景 | 原图虚化偏暗 | 保白字 AA |
+
+**字体：** 仅 `typography-scattered.jpg` — playful brush pen, rounded tips, scattered staircase lines。**不要** outline/marker。
+
+### color_block ← ref-specialty-dish
+
+| 用途 | hex | 说明 |
+|------|-----|------|
+| 主标题 | `#DC2626` | 红 brush |
+| 色块 primary | `#38BDF8` | 浅蓝 |
+| 色块 secondary | `#FEF3C7` | 奶油底 |
+| 点缀/副标 | `#FCA5A5` | 浅红 |
+| 主体 sticker 描边 | `#DC2626` | 红偏移描边 |
+
+**字体：** 仅 `typography-marker.jpg` — fat casual ins marker on color block。**不要** outline/scattered。
 
 ## 构图要点
 
-**exaggerated_headline** — 标题 50–65% 视觉；主体 40–55% 放大；**细描边**不抢标题；装饰极少
+**exaggerated** — 标题霸屏 50–65%；主体放大；细白描边；无 doodle
 
-**doodle_fresh** — 标题中等偏大散落；主体 30–45%；**必配 2～4 doodle**（星/箭头/线稿 icon/bubble）；sketchy 描边
+**doodle** — 字散落；2–4 黄/白 doodle；主体黄 sketchy 描边
 
-**color_block** — 大色块 30–50%（从提取色衍生）；撕纸/斜切；主体 sticker 描边；标题在纯色块上
+**color_block** — 蓝+奶油色块；红标题在块上；撕纸/ halftone 可选
 
 ## 通用模板
 
 ```
-Xiaohongshu cover. Subject extracted/isolated — keep face, pose, clothing.
+Xiaohongshu cover 3:4. Subject from user photo — isolated, unchanged.
 
-STYLE PRESET: {preset}
-Match COMPOSITION from: references/covers/{dir}/{cover_ref_file}
-Match TYPOGRAPHY from: references/{typography_ref_file} — {keywords above}
+PRESET: {preset}
+COMPOSITION — copy exactly from: references/covers/.../{cover_ref}
+TYPOGRAPHY — copy brush style ONLY from: references/{typography_ref}
+  Do NOT mix other typography files. Clone stroke weight, texture, layout feel.
 
-SUBJECT: scale {subject_scale}, placement {subject_placement}, outline {outline_spec}
+COLORS — use preset palette hex above ONLY. Do NOT sample colors from user photo.
 
-COLORS — from analysis.extracted_palette / color_roles:
-title_fill {hex} ({source}), outline {hex}, doodle/block {hex list}
-WCAG AA ≥4.5:1 text vs bg; adjust lightness within same hue family only
+SUBJECT: scale {scale}, placement {placement}, outline per palette
 
-TEXT — EXACT Chinese: 「{title_full}」
-{text_blocks_description}
+TEXT EXACT: 「{title_full}」
+{blocks}
 
 DECORATIONS: {per preset}
-
-Never system fonts. 3:4 vertical.
+WCAG AA. Never system fonts.
 ```
 
 ## 中文补充
 
 ```
-构图参考 {cover_ref}，字体参考 {typography_ref}。
-颜色从原图提取：{color_roles}，WCAG AA。标题逐字正确：{title_full}。
+构图严格参考 {cover_ref}，字体只参考 {typography_ref} 这一种笔刷。
+颜色用参考图色板：{hex list}，不要从用户照片取色。
+标题逐字正确：{title_full}。
 ```
 
 ## 参数
 
 strength 0.3～0.5 · 并行 3 条 · 错字重试 1 次
-
-## 降级
-
-输出 3 条填好的 prompt + 3 份 layout + 参考图路径

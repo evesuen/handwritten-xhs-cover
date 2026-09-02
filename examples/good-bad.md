@@ -4,24 +4,14 @@
 
 | 特征 | 说明 |
 |------|------|
-| 夸张大字 | 标题霸屏，主体大但有细描边，字仍是主角 |
-| 手绘小清新 | 有星星/箭头/线稿 doodle + 描边主体，轻快 vlog 感 |
-| 色块拼贴 | 蓝/黄/白大块 + 撕纸边，标题在纯色块上可读 |
-| WCAG AA | 白字 on 暗底、深字 on 黄块 |
+| 字体 1:1 | exaggerated 只用 outline；doodle 只用 scattered；color 只用 marker |
+| 颜色固定 | 用 reference 色板（红白黄/白黄/红蓝 cream） |
+| 构图像 cover ref | 大字霸屏 / doodle 散落 / 色块拼贴 |
 
 ## ❌ 差
 
 | 反例 | 原因 |
 |------|------|
-| Style1 主体描边太粗 | 抢标题 |
-| Style2 无 doodle | 不像小清新参考 |
-| Style3 整图滤镜无色块 | 不像拼贴参考 |
-| 套模板色不看图 | 与主体脱节 |
-
-## 同标题三风格
-
-「你的贵人是 AI」：
-
-- **exaggerated**：「是 AI」极大，人物下方，细白描边
-- **doodle**：手写散落 + 黄色 motion lines + 小英文
-- **color_block**：蓝块上白字标题，人物 sticker 描边叠在块边
+| 同时参考 outline+scattered | 字体四不像 |
+| 从用户照片取棕色当字色 | 违反规则，应使用 reference 色板 |
+| 三种 typography 混在一张 | 禁止 |

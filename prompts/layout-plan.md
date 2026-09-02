@@ -1,65 +1,57 @@
 # 排版 · 3 种封面风格
 
-基于 `analysis.json` + 标题，**固定输出 3 份 layout**。
+基于 `analysis.json` + 标题，输出 3 份 layout。
 
-**所有颜色必须来自 `analysis.extracted_palette` / `color_roles`**，仅允许为达 WCAG AA 做明度微调。
+**颜色：只用 `generate-poster.md` 里各 preset 的参考色板（来自封面 reference 图），禁止从用户原图取色。**
 
-## 对比度（WCAG AA，必做）
-
-用 `color_roles` 填 hex 后验算；layout 含 `contrast.verified: true`。不够则同色相调明度或加 scrim。
+**字体：每个 preset 仅绑定 1 个 typography 参考，禁止混用。**
 
 ## 单份 layout Schema
 
 ```json
 {
   "preset": "exaggerated_headline",
-  "title_full": "高精力人",
-  "colors_from_extraction": true,
-  "color_roles_used": {
-    "title_fill": "#E53935",
-    "title_outline": "#FACC15",
-    "source": "analysis.color_roles — 主体粉+环境黄衍生"
-  },
-  "cover_refs": ["references/covers/exaggerated-headline/ref-high-energy.png"],
-  "typography_refs": ["references/typography-outline.jpg"],
+  "title_full": "不好意思，请问今天几点开饭",
+  "cover_ref": "references/covers/exaggerated-headline/ref-high-energy.png",
+  "typography_ref": "references/typography-outline.jpg",
+  "palette_ref": "ref-high-energy",
   "subject_placement": "center-lower",
   "subject_scale": 0.5,
   "text_blocks": [
     {
-      "content": "高精力人",
+      "content": "请问今天几点开饭",
       "color": "#E53935",
-      "outline_color": "#FACC15",
+      "outline_color": "#FFEB3B",
       "outline": "yellow_thick",
-      "layout": "horizontal",
       "position": "top-center",
       "size": "xlarge"
     }
   ],
   "decorations": [],
-  "contrast": { "target": "WCAG_AA", "min_ratio": 4.5, "verified": true }
+  "contrast": { "target": "WCAG_AA", "verified": true }
 }
 ```
 
-## 三 preset 用色
+## 固定参考绑定（各 1 张，勿改）
+
+| preset | cover_ref | typography_ref | 色板来源 |
+|--------|-----------|----------------|----------|
+| exaggerated_headline | ref-high-energy.png | typography-outline.jpg | 同上 |
+| doodle_fresh | ref-wonder-night.png | typography-scattered.jpg | 同上 |
+| color_block | ref-specialty-dish.png | typography-marker.jpg | 同上 |
+
+## 三 preset 排版
 
 ### exaggerated_headline
-
-- `title_fill` / `title_outline`：来自主体 accent + highlights
-- 双色字时：fill 取 subject 主色，outline 取 highlights 或 subject 第二色
-- 主体细描边：用 `subject_outline`（常与 doodle 同色 family）
+- 标题 50–65%；主体 40–55%；细描边
+- 可拆两行：上行较小、下行 xlarge（见 ref-high-energy）
 
 ### doodle_fresh
-
-- 散落字：可用 1～2 个 extracted 色（如主体粉 + 环境黄）
-- doodle / 描边：`doodle_stroke`、`subject_outline` 从提取色
-- 小 quote/英文：extracted 色的低饱和或 text_zone 对比色
+- 标题散落 2–4 块；主体 30–45%；2–4 doodle；sketchy 描边
 
 ### color_block
-
-- `block_colors`：**必须**从 `from_background` + `from_subject` 衍生（提饱和/压暗），2～3 个
-- 标题在块上：fill 与 block 验 AA；常用 block 的互补明度色
-- sticker 描边：主体 accent 或 block 对比色
+- 大色块 30–50%；标题在色块上；sticker 主体描边
 
 ## 标题拆分
 
-同前；**hex 一律引用 analysis，不写死色板**。
+按 preset 拆 `text_blocks`；hex **只许用 generate-poster 色板表**。
