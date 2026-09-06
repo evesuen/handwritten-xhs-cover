@@ -5,6 +5,7 @@
 1. **每种 preset 只开 1 张封面参考 + 1 张字体参考**，严格 1:1 绑定，禁止混 typography、禁止同时参考多种笔刷。
 2. **颜色只用下方色板**（摘自封面 reference 图），**禁止从用户原图提取配色**。
 3. 构图学 cover_ref；**字体笔刷完全克隆 typography_ref**；WCAG AA。
+4. **B/C 补充小字最多 1 条、一两句（≤12 字）**。学构图/色/doodle，**不要抄 cover_ref 里的活动说明、地址、日期、多条贴纸、长 quote**。doodle 保留。
 
 ## 固定绑定（不可换）
 
@@ -50,7 +51,7 @@ prompt 必写：`Clone typography-outline.jpg exactly: ultra-bold dry brush mark
 |------|-----|------|
 | 散落字 | `#FFFFFF` | 白手写 |
 | doodle/描边 | `#FACC15` | 黄线稿 |
-| 小英文/quote | `#FFFFFF` | 可选 |
+| 小英文 | `#FFFFFF` | 最多 1 条短点缀，禁止长 quote |
 | 背景 | 原图虚化偏暗 | 保白字 AA |
 
 **字体（必须极度贴近 typography-scattered.jpg，占 prompt 50% 篇幅）：**
@@ -63,10 +64,10 @@ prompt 必写：`Clone typography-outline.jpg exactly: ultra-bold dry brush mark
 | 边缘 | 略带 ink bleed，**圆润有机**，不要 jagged 毛糙（这是 scattered 与 outline 的核心区别） |
 | 排版 | **阶梯式/波浪式错落**（staggered staircase），绝不在一条直线上 |
 | 字大小 | 每字略不同，有节奏；可有**超长竖划**贯穿（如「样」「法」那种） |
-| 点缀 | 可选小字 **pinyin/英文** 填负空间（HUA YANG 风格），clean sans 与主字对比 |
+| 点缀 | 最多 **1 条**短小字（单词/短语，如 `HUA YANG`，≤12 字），禁止长英文/鸡汤 |
 | 气质 | 俏皮、艺术、小红书 trendy，温暖流动 |
 
-prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded tips, organic taper strokes, staggered wave staircase layout, varied character sizes, optional small pinyin accents, smooth-rounded NOT jagged dry brush.`
+prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded tips, organic taper strokes, staggered wave staircase layout, varied character sizes, at most ONE tiny accent (1–3 words), NO long quotes, smooth-rounded NOT jagged dry brush.`
 
 **不要** outline / marker 笔刷。
 
@@ -77,18 +78,20 @@ prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded 
 | 主标题 | `#DC2626` | 红 brush |
 | 色块 primary | `#38BDF8` | 浅蓝 |
 | 色块 secondary | `#FEF3C7` | 奶油底 |
-| 点缀/副标 | `#FCA5A5` | 浅红 |
+| 点缀/副标 | `#FCA5A5` | 最多 1 条短副标（≤12 字），禁止多贴纸 |
 | 主体 sticker 描边 | `#DC2626` | 红偏移描边 |
 
 **字体：** 仅 `typography-marker.jpg` — fat casual ins marker on color block。**不要** outline/scattered。
+
+**补充小字：** 最多 1 条短副标（一两句 / ≤12 字）。**不要抄** cover_ref 里的活动说明、地址、日期、投稿须知、多条贴纸文案。doodle / 撕纸可留。
 
 ## 构图要点
 
 **exaggerated** — 标题霸屏 50–65%；主体放大；细白描边；无 doodle
 
-**doodle** — 字散落；2–4 黄/白 doodle；主体黄 sketchy 描边
+**doodle** — 字散落；**2–4 黄/白 doodle 保留**；主体黄 sketchy 描边；小字最多 1 条短句
 
-**color_block** — 蓝+奶油色块；红标题在块上；撕纸/ halftone 可选
+**color_block** — 蓝+奶油色块；红标题在块上；撕纸/halftone/doodle 可留；最多 1 条短副标
 
 ## 通用模板
 
@@ -109,7 +112,7 @@ SUBJECT: scale {scale}, placement {placement}, outline per palette
 TEXT EXACT: 「{title_full}」
 {blocks}
 
-DECORATIONS: {per preset}
+DECORATIONS: {per preset} — keep doodles; extra caption at most ONE short phrase (≤12 chars / 1–2 sentences). Do NOT copy event copy, addresses, dates, or long quotes from cover_ref.
 WCAG AA. Never system fonts.
 ```
 
@@ -118,6 +121,7 @@ WCAG AA. Never system fonts.
 ```
 构图严格参考 {cover_ref}，字体必须像素级贴近 typography 参考图笔刷（outline=毛糙干刷；scattered=圆润阶梯笔）。颜色用 reference 色板。
 标题逐字正确：{title_full}。
+B/C 补充小字最多 1 条一两句；doodle 保留；勿抄参考图长文案。
 ```
 
 ## 参数
