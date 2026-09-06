@@ -19,12 +19,13 @@ description: >-
 - **禁止混用多种 typography**（否则字体四不像）
 - WCAG AA；禁止系统字体、超 25 字
 - **B/C 补充小字最多 1 条、一两句（≤12 字）**；doodle 保留；禁止长副标/鸡汤/活动说明
+- **A 禁止色块背景**：保留用户原图场景（天空/建筑/室内）；`#3E2723` 只是字色参考，禁止铺满后景。色块只属于 C
 
 ## 三 preset 绑定
 
 | preset | 封面 | 字体 | 色板来源 |
 |--------|------|------|----------|
-| exaggerated_headline | ref-high-energy | typography-outline | 红白黄深棕 |
+| exaggerated_headline | ref-high-energy | typography-outline | 红白黄字色（背景用原图） |
 | doodle_fresh | ref-wonder-night | typography-scattered | 白字黄 doodle |
 | color_block | ref-specialty-dish | typography-marker | 红字蓝奶油块 |
 

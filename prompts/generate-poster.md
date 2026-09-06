@@ -6,6 +6,7 @@
 2. **颜色只用下方色板**（摘自封面 reference 图），**禁止从用户原图提取配色**。
 3. 构图学 cover_ref；**字体笔刷完全克隆 typography_ref**；WCAG AA。
 4. **B/C 补充小字最多 1 条、一两句（≤12 字）**。学构图/色/doodle，**不要抄 cover_ref 里的活动说明、地址、日期、多条贴纸、长 quote**。doodle 保留。
+5. **A 禁止色块背景。** 学 cover_ref 的标题大小/堆叠/字色，**背景必须保留用户原图场景**，禁止把 reference 的深棕墙/底色铺到用户图上。色块只属于 `color_block`。禁止把 hex 写进画面。
 
 ## 固定绑定（不可换）
 
@@ -25,9 +26,11 @@
 |------|-----|------|
 | 上行字 | `#FFFFFF` | 白手写 |
 | 主标题 fill | `#E53935` | 红 |
-| 主标题 outline | `#FFEB3B` | 黄描边 |
-| 背景/scrim | `#3E2723` | 深棕 |
+| 主标题 outline | `#FFEB3B` | 黄描边（只描字，不是字后色块） |
+| 背景 | 用户原图 | **禁止**铺 `#3E2723` 或任何实心色块替换天空/场景 |
 | 主体细描边 | `#FFFFFF` | 细白，不抢字 |
+
+`#3E2723` 来自参考图里的墙，**不是**给用户封面铺底的。对比不够时：仅在文字后方轻微压暗原图（半透明），禁止矩形/半屏实心色块。
 
 **字体（必须极度贴近 typography-outline.jpg，占 prompt 50% 篇幅）：**
 
@@ -87,7 +90,7 @@ prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded 
 
 ## 构图要点
 
-**exaggerated** — 标题霸屏 50–65%；主体放大；细白描边；无 doodle
+**exaggerated** — 标题霸屏 50–65%；主体放大；细白描边；无 doodle；**保留原图背景，禁止铺色块**
 
 **doodle** — 字散落；**2–4 黄/白 doodle 保留**；主体黄 sketchy 描边；小字最多 1 条短句
 
@@ -105,7 +108,9 @@ TYPOGRAPHY — 最高优先级，ONLY from references/{typography_ref}:
 Typography must be visually indistinguishable in brush texture from the typography reference image.
 Do NOT use generic bold font, smooth vector text, or system typeface.
 
-COLORS — use preset palette hex above ONLY. Do NOT sample colors from user photo.
+COLORS — use preset palette hex above ONLY for TEXT / outlines / C-blocks. Do NOT sample colors from user photo.
+BACKGROUND (A / doodle): KEEP the user's original photo scene (sky, buildings, interior). NEVER replace it with a solid fill (#3E2723 or any block). Color blocks are color_block preset ONLY.
+Never render hex codes or palette labels as visible text.
 
 SUBJECT: scale {scale}, placement {placement}, outline per palette
 
@@ -119,7 +124,8 @@ WCAG AA. Never system fonts.
 ## 中文补充
 
 ```
-构图严格参考 {cover_ref}，字体必须像素级贴近 typography 参考图笔刷（outline=毛糙干刷；scattered=圆润阶梯笔）。颜色用 reference 色板。
+构图学 {cover_ref} 的标题大小与堆叠，字体必须像素级贴近 typography 参考图笔刷（outline=毛糙干刷；scattered=圆润阶梯笔）。字色用 reference 色板。
+A 必须保留用户原图背景，禁止铺深棕/任何色块；色块只属于 C。不要把 hex 写进画面。
 标题逐字正确：{title_full}。
 B/C 补充小字最多 1 条一两句；doodle 保留；勿抄参考图长文案。
 ```

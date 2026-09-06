@@ -45,6 +45,7 @@
 ### exaggerated_headline
 - 标题 50–65%；主体 40–55%；细描边
 - 可拆两行：上行较小、下行 xlarge（见 ref-high-energy）
+- **背景 = 用户原图**（可轻微虚化/压暗字后）；禁止铺色块、禁止换底成 `#3E2723`
 
 ### doodle_fresh
 - 标题散落 2–4 块；主体 30–45%；**2–4 doodle 保留**；sketchy 描边

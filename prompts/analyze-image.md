@@ -18,12 +18,14 @@
 }
 ```
 
+`replace_for_color_block` **仅 C 可用**。A / B 只能 `keep_soft` 或 `blur`。
+
 ## 判断要点
 
 | 维度 | 看什么 |
 |------|--------|
 | 主体 | 类型、位置、抠图注意点 |
 | 留白 | 分离主体后哪块放字 |
-| 背景 | 是否虚化；color_block 是否需换底 |
+| 背景 | A/B 只可虚化或保留原图，**禁止换底**；仅 color_block 可换底 |
 
 **禁止**输出 extracted_palette / color_roles。
