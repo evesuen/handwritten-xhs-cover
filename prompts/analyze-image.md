@@ -18,7 +18,7 @@
 }
 ```
 
-`replace_for_color_block` **仅 C 可用**。A / B 只能 `keep_soft` 或 `blur`。
+A / B 只能 `keep_soft` 或 `blur`。C 优先 `keep_soft`（原图底 + 撕纸色块），**不要**整页 `replace_for_color_block`。
 
 ## 判断要点
 
@@ -26,6 +26,6 @@
 |------|--------|
 | 主体 | 类型、位置、抠图注意点 |
 | 留白 | 分离主体后哪块放字 |
-| 背景 | A/B 只可虚化或保留原图，**禁止换底**；仅 color_block 可换底 |
+| 背景 | A/B 只可虚化或保留原图；C 也保留原图，只在上面叠撕纸色块，禁止整页换奶油底 |
 
 **禁止**输出 extracted_palette / color_roles。

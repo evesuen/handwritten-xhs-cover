@@ -5,8 +5,9 @@
 1. **每种 preset 只开 1 张封面参考 + 1 张字体参考**，严格 1:1 绑定，禁止混 typography、禁止同时参考多种笔刷。
 2. **颜色只用下方色板**（摘自封面 reference 图），**禁止从用户原图提取配色**。
 3. 构图学 cover_ref；**字体笔刷完全克隆 typography_ref**；WCAG AA。
-4. **B/C 补充小字最多 1 条、一两句（≤12 字）**。学构图/色/doodle，**不要抄 cover_ref 里的活动说明、地址、日期、多条贴纸、长 quote**。doodle 保留。
+4. **B/C 除用户标题外，最多再加 1 条短小字（≤12 字）。** 色块默认无字。禁止：多条贴纸文案、英文 slogan（Good Day / Nice Weather…）、把标题换说法再写一遍、抄 cover_ref 活动说明。doodle（心/星/太阳/箭头）可留。
 5. **A 禁止色块背景。** 学 cover_ref 的标题大小/堆叠/字色，**背景必须保留用户原图场景**，禁止把 reference 的深棕墙/底色铺到用户图上。色块只属于 `color_block`。禁止把 hex 写进画面。
+6. **C 色块必须是撕纸/拼贴纸片，叠在用户原图上。** 蓝+奶油+**粉**三色都要出现；纸片衬标题或留空，**不要每块都写字**。禁止：整页奶油换底、一块蓝底托人、漏粉色、用多条小字填满色块。
 
 ## 固定绑定（不可换）
 
@@ -78,15 +79,23 @@ prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded 
 
 | 用途 | hex | 说明 |
 |------|-----|------|
-| 主标题 | `#DC2626` | 红 brush |
-| 色块 primary | `#38BDF8` | 浅蓝 |
-| 色块 secondary | `#FEF3C7` | 奶油底 |
-| 点缀/副标 | `#FCA5A5` | 最多 1 条短副标（≤12 字），禁止多贴纸 |
+| 主标题 | `#DC2626` | 红 brush，坐在撕纸块上 |
+| 色块蓝 | `#38BDF8` | **必出**：标题下撕纸块 |
+| 色块奶油 | `#FEF3C7` | **必出**：另一条标题撕纸块 |
+| 色块粉 | `#FCA5A5` | **必出**：1 块空白粉色撕纸（或只加粉心 doodle）；默认无字 |
 | 主体 sticker 描边 | `#DC2626` | 红偏移描边 |
 
 **字体：** 仅 `typography-marker.jpg` — fat casual ins marker on color block。**不要** outline/scattered。
 
-**补充小字：** 最多 1 条短副标（一两句 / ≤12 字）。**不要抄** cover_ref 里的活动说明、地址、日期、投稿须知、多条贴纸文案。doodle / 撕纸可留。
+**色块怎么用（豆包易错，按这个做）：**
+- 底层 = **用户原图还在**（天空/建筑可露出来），边缘可加 cream/蓝 halftone，**不要整页铺奶油把照片抹掉**
+- 色块 = **2～3 张撕纸/锯齿纸片**（jagged torn paper），歪斜叠在标题和侧边，像剪贴簿
+- 红标题必须压在奶油块 + 蓝块上（可拆两行，一行一块）
+- **粉色 `#FCA5A5` 必须作为色块出现**，默认空白 + 粉心 doodle，不能只拿来写红字
+- **禁止**用一块大地蓝多边形把人「框」在中间当背景
+- **禁止**在蓝/奶油/粉色块上再写「和阳光见个面」「今天适合散步」「Nice Weather」这类额外文案
+
+**补充小字：** 整张图除标题外最多 1 条（≤12 字），没有更好。色块是颜色，不是文案栏。doodle 保留。
 
 ## 构图要点
 
@@ -94,7 +103,7 @@ prompt 必写：`Clone typography-scattered.jpg exactly: soft brush pen rounded 
 
 **doodle** — 字散落；**2–4 黄/白 doodle 保留**；主体黄 sketchy 描边；小字最多 1 条短句
 
-**color_block** — 蓝+奶油色块；红标题在块上；撕纸/halftone/doodle 可留；最多 1 条短副标
+**color_block** — 原图底 + 撕纸拼贴；蓝+奶油+**粉色块都要有（纸片默认为空）**；红标题压在撕纸上；doodle 留；除标题外最多 1 条短句；禁止单块蓝底托人、禁止多条小字
 
 ## 通用模板
 
@@ -109,15 +118,16 @@ Typography must be visually indistinguishable in brush texture from the typograp
 Do NOT use generic bold font, smooth vector text, or system typeface.
 
 COLORS — use preset palette hex above ONLY for TEXT / outlines / C-blocks. Do NOT sample colors from user photo.
-BACKGROUND (A / doodle): KEEP the user's original photo scene (sky, buildings, interior). NEVER replace it with a solid fill (#3E2723 or any block). Color blocks are color_block preset ONLY.
+BACKGROUND (A / doodle): KEEP the user's original photo scene (sky, buildings, interior). NEVER replace it with a solid fill (#3E2723 or any block).
+BACKGROUND (C): KEEP the photo as the base. Overlay 2–3 torn-paper pieces in #38BDF8 + #FEF3C7 + #FCA5A5 (pink REQUIRED as a blank block). Do NOT wipe the photo to flat cream. Do NOT put the subject inside one big blue blob. Do NOT write slogans on every paper piece.
 Never render hex codes or palette labels as visible text.
 
 SUBJECT: scale {scale}, placement {placement}, outline per palette
 
-TEXT EXACT: 「{title_full}」
+TEXT EXACT: 「{title_full}」 only. Optional ONE extra phrase ≤12 chars. No other captions, no English slogans.
 {blocks}
 
-DECORATIONS: {per preset} — keep doodles; extra caption at most ONE short phrase (≤12 chars / 1–2 sentences). Do NOT copy event copy, addresses, dates, or long quotes from cover_ref.
+DECORATIONS: {per preset} — doodles OK (hearts/stars/arrows). Extra caption at most ONE short phrase. Color blocks stay mostly empty.
 WCAG AA. Never system fonts.
 ```
 
@@ -126,8 +136,8 @@ WCAG AA. Never system fonts.
 ```
 构图学 {cover_ref} 的标题大小与堆叠，字体必须像素级贴近 typography 参考图笔刷（outline=毛糙干刷；scattered=圆润阶梯笔）。字色用 reference 色板。
 A 必须保留用户原图背景，禁止铺深棕/任何色块；色块只属于 C。不要把 hex 写进画面。
-标题逐字正确：{title_full}。
-B/C 补充小字最多 1 条一两句；doodle 保留；勿抄参考图长文案。
+C：原图还在；撕纸必须同时有蓝+奶油+粉；红标题压在撕纸上；色块默认空白。禁止整页奶油底、一块蓝底托人、每块纸都写字。
+标题逐字正确：{title_full}。除标题外最多 1 条短小字；doodle 可留。禁止 Good Day / Nice Weather / 把标题再说一遍。
 ```
 
 ## 参数
